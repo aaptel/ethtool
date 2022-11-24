@@ -409,6 +409,33 @@ static const struct pretty_nla_desc __module_desc[] = {
 	NLATTR_DESC_U8(ETHTOOL_A_MODULE_POWER_MODE),
 };
 
+static const struct pretty_nla_desc __ulp_ddp_stats_map_item_desc[] = {
+	NLATTR_DESC_INVALID(ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_UNSPEC),
+	NLATTR_DESC_STRING(ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_NAME),
+	NLATTR_DESC_U64(ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_VAL),
+};
+
+static const struct pretty_nla_desc __ulp_ddp_stats_map_desc[] = {
+	NLATTR_DESC_INVALID(ETHTOOL_A_ULP_DDP_STATS_MAP_UNSPEC),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM, ulp_ddp_stats_map_item),
+};
+
+static const struct pretty_nla_desc __ulp_ddp_stats_desc[] = {
+	NLATTR_DESC_INVALID(ETHTOOL_A_ULP_DDP_STATS_UNSPEC),
+	NLATTR_DESC_U32(ETHTOOL_A_ULP_DDP_STATS_COUNT),
+	NLATTR_DESC_BINARY(ETHTOOL_A_ULP_DDP_STATS_COMPACT_VALUES),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_STATS_MAP, ulp_ddp_stats_map),
+};
+
+static const struct pretty_nla_desc __ulp_ddp_desc[] = {
+	NLATTR_DESC_INVALID(ETHTOOL_A_ULP_DDP_UNSPEC),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_HEADER, header),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_HW, bitset),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_ACTIVE, bitset),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_WANTED, bitset),
+	NLATTR_DESC_NESTED(ETHTOOL_A_ULP_DDP_STATS, ulp_ddp_stats),
+};
+
 const struct pretty_nlmsg_desc ethnl_umsg_desc[] = {
 	NLMSG_DESC_INVALID(ETHTOOL_MSG_USER_NONE),
 	NLMSG_DESC(ETHTOOL_MSG_STRSET_GET, strset),
@@ -446,6 +473,8 @@ const struct pretty_nlmsg_desc ethnl_umsg_desc[] = {
 	NLMSG_DESC(ETHTOOL_MSG_PHC_VCLOCKS_GET, phc_vclocks),
 	NLMSG_DESC(ETHTOOL_MSG_MODULE_GET, module),
 	NLMSG_DESC(ETHTOOL_MSG_MODULE_SET, module),
+	NLMSG_DESC(ETHTOOL_MSG_ULP_DDP_GET, ulp_ddp),
+	NLMSG_DESC(ETHTOOL_MSG_ULP_DDP_SET, ulp_ddp),
 };
 
 const unsigned int ethnl_umsg_n_desc = ARRAY_SIZE(ethnl_umsg_desc);

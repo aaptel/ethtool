@@ -47,6 +47,8 @@ int nl_gmodule(struct cmd_context *ctx);
 int nl_smodule(struct cmd_context *ctx);
 int nl_monitor(struct cmd_context *ctx);
 int nl_getmodule(struct cmd_context *ctx);
+int nl_get_ulp_ddp(struct cmd_context *ctx);
+int nl_set_ulp_ddp(struct cmd_context *ctx);
 
 void nl_monitor_usage(void);
 

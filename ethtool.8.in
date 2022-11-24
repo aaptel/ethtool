@@ -233,6 +233,14 @@ ethtool \- query or control network driver and hardware settings
 .A1 on off
 .RB ...
 .HP
+.B ethtool \-j|\-\-show\-ulp-ddp
+.I devname
+.HP
+.B ethtool \-J|\-\-ulp-ddp
+.I devname capability
+.A1 on off
+.RB ...
+.HP
 .B ethtool \-p|\-\-identify
 .I devname
 .RI [ N ]
@@ -666,6 +674,13 @@ Specifies whether Rx ntuple filters and actions should be enabled
 .A2 rxhash on off
 Specifies whether receive hashing offload should be enabled
 .RE
+.TP
+.B \-j \-\-show\-ulp-ddp
+Queries the specified network device for the state of ULP DDP.
+.TP
+.B \-J \-\-ulp-ddp
+Changes the ULP DDP offload parameters and other capabilities of the specified
+network device.
 .TP
 .B \-p \-\-identify
 Initiates adapter-specific action intended to enable an operator to
