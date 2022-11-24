@@ -6,8 +6,8 @@
  * doucumentation of the interface.
  */
 
-#ifndef _LINUX_ETHTOOL_NETLINK_H_
-#define _LINUX_ETHTOOL_NETLINK_H_
+#ifndef _UAPI_LINUX_ETHTOOL_NETLINK_H_
+#define _UAPI_LINUX_ETHTOOL_NETLINK_H_
 
 #include <linux/ethtool.h>
 
@@ -49,6 +49,10 @@ enum {
 	ETHTOOL_MSG_PHC_VCLOCKS_GET,
 	ETHTOOL_MSG_MODULE_GET,
 	ETHTOOL_MSG_MODULE_SET,
+	ETHTOOL_MSG_PSE_GET,
+	ETHTOOL_MSG_PSE_SET,
+	ETHTOOL_MSG_ULP_DDP_GET,
+	ETHTOOL_MSG_ULP_DDP_SET,
 
 	/* add new constants above here */
 	__ETHTOOL_MSG_USER_CNT,
@@ -94,6 +98,9 @@ enum {
 	ETHTOOL_MSG_PHC_VCLOCKS_GET_REPLY,
 	ETHTOOL_MSG_MODULE_GET_REPLY,
 	ETHTOOL_MSG_MODULE_NTF,
+	ETHTOOL_MSG_PSE_GET_REPLY,
+	ETHTOOL_MSG_ULP_DDP_GET_REPLY,
+	ETHTOOL_MSG_ULP_DDP_SET_REPLY,
 
 	/* add new constants above here */
 	__ETHTOOL_MSG_KERNEL_CNT,
@@ -242,6 +249,7 @@ enum {
 	ETHTOOL_A_LINKMODES_MASTER_SLAVE_CFG,	/* u8 */
 	ETHTOOL_A_LINKMODES_MASTER_SLAVE_STATE,	/* u8 */
 	ETHTOOL_A_LINKMODES_LANES,		/* u32 */
+	ETHTOOL_A_LINKMODES_RATE_MATCHING,	/* u8 */
 
 	/* add new constants above here */
 	__ETHTOOL_A_LINKMODES_CNT,
@@ -862,10 +870,68 @@ enum {
 	ETHTOOL_A_MODULE_MAX = (__ETHTOOL_A_MODULE_CNT - 1)
 };
 
+/* Power Sourcing Equipment */
+enum {
+	ETHTOOL_A_PSE_UNSPEC,
+	ETHTOOL_A_PSE_HEADER,			/* nest - _A_HEADER_* */
+	ETHTOOL_A_PODL_PSE_ADMIN_STATE,		/* u32 */
+	ETHTOOL_A_PODL_PSE_ADMIN_CONTROL,	/* u32 */
+	ETHTOOL_A_PODL_PSE_PW_D_STATUS,		/* u32 */
+
+	/* add new constants above here */
+	__ETHTOOL_A_PSE_CNT,
+	ETHTOOL_A_PSE_MAX = (__ETHTOOL_A_PSE_CNT - 1)
+};
+
+/* ULP_DDP */
+
+enum {
+	ETHTOOL_A_ULP_DDP_UNSPEC,
+	ETHTOOL_A_ULP_DDP_HEADER,			/* nest - _A_HEADER_* */
+	ETHTOOL_A_ULP_DDP_HW,				/* bitset */
+	ETHTOOL_A_ULP_DDP_ACTIVE,			/* bitset */
+	ETHTOOL_A_ULP_DDP_WANTED,			/* bitset */
+	ETHTOOL_A_ULP_DDP_STATS,                        /* nest - _A_ULP_DDP_STATS_* */
+
+	/* add new constants above here */
+	__ETHTOOL_A_ULP_DDP_CNT,
+	ETHTOOL_A_ULP_DDP_MAX = __ETHTOOL_A_ULP_DDP_CNT - 1
+};
+
+enum {
+	ETHTOOL_A_ULP_DDP_STATS_UNSPEC,
+	ETHTOOL_A_ULP_DDP_STATS_COUNT,			/* u32 */
+	ETHTOOL_A_ULP_DDP_STATS_COMPACT_VALUES,		/* array, u64 */
+	ETHTOOL_A_ULP_DDP_STATS_MAP,			/* nest - _A_ULP_DDP_STATS_MAP_* */
+
+	/* add new constants above here */
+	__ETHTOOL_A_ULP_DDP_STATS_CNT,
+	ETHTOOL_A_ULP_DDP_STATS_MAX = __ETHTOOL_A_ULP_DDP_STATS_CNT - 1
+};
+
+enum {
+	ETHTOOL_A_ULP_DDP_STATS_MAP_UNSPEC,
+	ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM,		/* next - _A_ULP_DDP_STATS_MAP_ITEM_* */
+
+	/* add new constants above here */
+	__ETHTOOL_A_ULP_DDP_STATS_MAP_CNT,
+	ETHTOOL_A_ULP_DDP_STATS_MAP_MAX = __ETHTOOL_A_ULP_DDP_STATS_MAP_CNT - 1
+};
+
+enum {
+	ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_UNSPEC,
+	ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_NAME,		/* string */
+	ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_VAL,		/* u64 */
+
+	/* add new constants above here */
+	__ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_CNT,
+	ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_MAX = __ETHTOOL_A_ULP_DDP_STATS_MAP_ITEM_CNT - 1
+};
+
 /* generic netlink info */
 #define ETHTOOL_GENL_NAME "ethtool"
 #define ETHTOOL_GENL_VERSION 1
 
 #define ETHTOOL_MCGRP_MONITOR_NAME "monitor"
 
-#endif /* _LINUX_ETHTOOL_NETLINK_H_ */
+#endif /* _UAPI_LINUX_ETHTOOL_NETLINK_H_ */

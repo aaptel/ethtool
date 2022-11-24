@@ -5743,6 +5743,17 @@ static const struct option args[] = {
 			  "		[ tx-push on|off]\n"
 	},
 	{
+		.opts	= "-j|--show-ulp-ddp",
+		.nlfunc	= nl_get_ulp_ddp,
+		.help	= "Get state of ULP DDP"
+	},
+	{
+		.opts	= "-J|--ulp-ddp",
+		.nlfunc	= nl_set_ulp_ddp,
+		.help	= "Set ULP DDP offload and other capabilities",
+		.xhelp	= "		CAPABILITY on|off ...\n"
+	},
+	{
 		.opts	= "-k|--show-features|--show-offload",
 		.json	= true,
 		.func	= do_gfeatures,
